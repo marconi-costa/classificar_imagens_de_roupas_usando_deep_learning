@@ -38,16 +38,21 @@ modelo.compile(optimizer='adam',
                loss='sparse_categorical_crossentropy',
                metrics= ['accuracy'])
 
-historico = modelo.fit(x_train, y_train, epochs = 5, validation_split=0.2)
-
-historico.history
+historico = modelo.fit(x_train, y_train, epochs = 30, validation_split=0.2)
 
 plt.plot(historico.history['accuracy'])
 plt.plot(historico.history['val_accuracy'])
 plt.title('Acuracia por épocas')
 plt.xlabel('Épocas')
 plt.ylabel('Acuracia')
-plt.legend(['treino', 'avaliação'])
+plt.legend(['treino', 'validação'])
+
+plt.plot(historico.history['loss'])
+plt.plot(historico.history['val_loss'])
+plt.title('Perda por épocas')
+plt.xlabel('Épocas')
+plt.ylabel('Perda')
+plt.legend(['treino', 'validação'])
 
 testes = modelo.predict(x_test)
 print('resultado do teste', np.argmax(testes[0]))
